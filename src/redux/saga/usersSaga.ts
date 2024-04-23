@@ -11,11 +11,7 @@ function* fetchUsersSaga({
     const data: GetUsersType = yield call(() => getUsers({ token, page }));
     yield put(loadUsersSuccess({ total: data.total, users: data.data }));
   } catch (error: any) {
-    yield put(
-      loadUsersFail(
-        error?.message || "There Seem's to be a problem please try again"
-      )
-    );
+    yield put(loadUsersFail("There Seem's to be a problem please try again"));
   }
 }
 

@@ -27,11 +27,12 @@ function* loginSaga({
 }: PayloadAction<{ email: string; password: string }>) {
   try {
     const data: ILoginType = yield call(() => Login({ email, password }));
+
     yield put(loginSuccess({ token: data.token, user: { ...data } }));
   } catch (error: any) {
     yield put(
       loginFail(
-        error?.message || "There Seem's to be a problem logging in try again"
+        "There Seem's to be a problem logging in try again and check your email and password"
       )
     );
   }
@@ -42,11 +43,8 @@ function* signupSaga({ payload: inputs }: PayloadAction<IInputs>) {
     yield call(() => Register(inputs));
     yield put(signupSuccess({}));
   } catch (error: any) {
-    yield put(
-      signupFail(
-        error?.message || "There Seem's to be a problem signinig up try again"
-      )
-    );
+    console.log(error);
+    yield put(signupFail("There Seem's to be a problem signinig up try again"));
   }
 }
 
@@ -60,10 +58,7 @@ function* updateSaga({
     yield put(updateSuccess(data));
   } catch (error: any) {
     yield put(
-      updateFail(
-        error?.message ||
-          "There Seem's to be a problem updating your data try again"
-      )
+      updateFail("There Seem's to be a problem updating your data try again")
     );
   }
 }

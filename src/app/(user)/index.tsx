@@ -1,11 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
 import Colors from "../../constants/Colors";
 import UserListItem from "../../components/UserListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { IState } from "../../types";
-import Loader from "../../components/Loader";
 import { logout } from "../../redux/slices/authSlice";
 
 const Home = () => {
@@ -19,8 +18,6 @@ const Home = () => {
     }
   };
 
-  if (isLoading) return <Loader />;
-  if (error) alert(error || "Something went wrong try again");
   return (
     <>
       <Stack.Screen

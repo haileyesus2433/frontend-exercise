@@ -23,6 +23,8 @@ export async function Register(values: IInputs) {
     const data = response.data;
     return data;
   } catch (error) {
+    console.log(error);
+
     throw error;
   }
 }

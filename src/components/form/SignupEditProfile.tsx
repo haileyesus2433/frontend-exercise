@@ -7,7 +7,7 @@ import * as Location from "expo-location";
 import Colors from "../../constants/Colors";
 import Button from "../Button";
 import Input from "../Input";
-import { validateSignup } from "../../utils/validations";
+import { validateSignup, validateUpdate } from "../../utils/validations";
 import FormContext from "../../context/formContext";
 import { reverseGeocode } from "../../utils/reverseGeocode";
 import { IInputs, IState } from "../../types";
@@ -85,8 +85,9 @@ const SignupEditProfile = ({ editing }: { editing?: boolean }) => {
 
   const submitHandler = async () => {
     if (editing) {
-      const isValid = validateSignup({ inputs, handleError });
+      const isValid = validateUpdate({ inputs, handleError });
       if (isValid) {
+        console.log(inputs);
         dispatch(update({ values: inputs, token, id: user._id }));
       }
     } else {

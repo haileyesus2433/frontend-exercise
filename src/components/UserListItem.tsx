@@ -10,9 +10,9 @@ const UserRenderer = (props: any) => {
   let user: IUser = props.item;
   return (
     <View style={styles.cardWrapper}>
-      <Image style={styles.image}
-      source={{uri:'https://avatar.iran.liara.run/public/12'}}
-      
+      <Image
+        style={styles.image}
+        source={{ uri: "https://avatar.iran.liara.run/public/12" }}
       />
       {user.isBuyer && (
         <View style={styles.buyer}>
@@ -41,18 +41,14 @@ const UserListItem = () => {
     dispatch(loadUsers({ page, token }));
   }, [page]);
 
-  if (error) alert(error || "Something went wrong please try again later");
-
-  if (isLoading) return <Loader />;
-
   return (
     <View>
-      {!isLoading && !error && users && users.length > 0 ? (
+      {users && users.length > 0 ? (
         <FlatList
           data={users}
           renderItem={UserRenderer}
           numColumns={2}
-          keyExtractor={(data) => data._id!}
+          keyExtractor={(data, index) => `${data._id!}_${index}`}
           showsVerticalScrollIndicator={false}
           onEndReached={() => {
             // implement infinte scrolling, check if there is total page and its greater
